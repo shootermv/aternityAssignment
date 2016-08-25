@@ -44,18 +44,20 @@ export class rolesService {
   createRole(role): angular.IPromise<any[]>{
     this.processPrivileges(role);
     return this.$http.post('/api/roles/create',role).then((response: any): any => {
-         console.log('success')
+         return  'data saved successfully';
     })
     .catch((error: any): any => {
         this.$log.error('XHR Failed create role.\n', error.data);
+        throw error.data;
     });
   }
   editRole(id, role): angular.IPromise<any[]>{
     this.processPrivileges(role);
     return this.$http.post('/api/roles/'+id+'/update',role).then((response: any): any => {
-        console.log('success')
+        return  'data saved successfully';
     }).catch((error: any): any => {
         this.$log.error('XHR Failed for getContributors.\n', error.data);
+        throw error.data;
     });
   }
   getAvaliabePrivileges(): angular.IPromise<any[]>{

@@ -11,13 +11,13 @@ export class MainController {
   
   /* @ngInject */
   constructor (
-    $timeout        : angular.ITimeoutService, 
-    webDevTec       : WebDevTecService,
-    toastr          : any, 
-    private $http   : ng.IHttpService,
-    public $mdDialog: ng.material.IDialogService, 
+    $timeout            : angular.ITimeoutService, 
+    webDevTec           : WebDevTecService,
+    toastr              : any, 
+    private $http       : ng.IHttpService,
+    public $mdDialog    : ng.material.IDialogService, 
     private rolesService:rolesService,
-    private $state: ng.ui.IStateProvider
+    private $state      : ng.ui.IStateProvider
     ) {
 
     this.awesomeThings = new Array();
@@ -27,10 +27,6 @@ export class MainController {
     this.toastr = toastr;
     this.activate($timeout);
   }
-
-
-
-
 
 
  deselectOthers(role) {
@@ -73,8 +69,8 @@ findSelected() {
     this.$mdDialog.show(confirm).then(() => { 
       this.rolesService.delRole(found.id)
       .then((data: any) => {
-         this.roles.splice(this.roles.indexOf(found),1);
-         this.showToastr();
+         this.roles.splice(this.roles.indexOf(found),1); //delete the role frmo the list
+         this.showToastr('deleted', 'success');
       });
     }, function() {
 
@@ -102,10 +98,9 @@ findSelected() {
     
   }
   
-  showToastr() {
-    this.toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-    this.classAnimation = '';
-  }
+ showToastr(txt, action) {
+    this.toastr[action](txt);
+ }
 
   getWebDevTec() {
     this.awesomeThings = this.webDevTec.tec;
