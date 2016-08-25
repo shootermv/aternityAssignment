@@ -1,23 +1,38 @@
 <div layout="vertical" layout-fill>
 
   <md-content>
-    <header>
-      <acme-navbar creation-date="main.creationDate"></acme-navbar>
-    </header>
+
 
     <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Roles</span>
-          </md-card-title-text>
-        </md-card-title>
+      <md-toolbar class="md-info">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Roles</h2>
 
-
-        <md-card-actions layout="row" layout-align="start center">
-          <md-button ng-click="main.addRoleModal()">Add</md-button>
-          <md-button ng-click="main.editRoleModal()" ng-if="main.findSelected()">Edit</md-button>
-          <md-button ng-click="main.deleteRoleModal($event)" ng-if="main.findSelected()">Delete</md-button>
-        </md-card-actions>
+          <md-menu md-position-mode="target-right target" ng-if="main.findSelected()">
+            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content width="4" >
+              <md-menu-item>
+                <md-button ng-click="main.editRoleModal()">
+                    <div layout="row" flex>
+                      <p flex>Edit</p>
+                      <md-icon>mode_edit</md-icon>
+                    </div>
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="main.deleteRoleModal($event)" >
+                    <div layout="row" flex>
+                      <p flex>Delete</p>
+                      <md-icon>delete</md-icon>
+                    </div>
+                </md-button>
+              </md-menu-item>            
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </md-toolbar>
 
          <md-card-content>
               <md-list-item ng-repeat="role in main.roles" ng-click="goToPerson(person.name, $event)" class="noright">
@@ -27,6 +42,24 @@
               </md-list-item>
             </md-list>
         </md-card-content>
+
+  <md-fab-toolbar md-open="demo.isOpen" count="demo.count">
+                  
+    <md-fab-trigger class="align-with-text">
+      <md-button aria-label="menu" class="md-fab md-warn" ng-click="main.addRoleModal()">
+        <md-icon>add</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+  
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+
+
+
+
     </md-card>
 
     <div class="techs" layout-align="center">
