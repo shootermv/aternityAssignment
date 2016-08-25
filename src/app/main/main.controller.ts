@@ -69,11 +69,9 @@ findSelected() {
     this.$mdDialog.show(confirm).then(() => { 
       this.rolesService.delRole(found.id)
       .then((data: any) => {
-         this.roles.splice(this.roles.indexOf(found),1); //delete the role frmo the list
+         this.roles.splice(this.roles.indexOf(found),1); //delete the role from the list
          this.showToastr('deleted', 'success');
       });
-    }, function() {
-
     });
  }
 
