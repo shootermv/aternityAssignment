@@ -6,7 +6,18 @@ Includes basic angular app which can send crud requests to the server
   - See roles list
   - Create role  
   - Edit role and its privileges
-  - Delte role
+  - Delete role
+
+### Features
+  - Form validations
+  - Error & Sucess feedbacks
+  - Animations
+
+### Tech
+  - Angular
+  - Material Design
+  - Typescript
+
 
 ### Compile To Es5 For Run With Tomcat
   - Open terminal on project root directory
