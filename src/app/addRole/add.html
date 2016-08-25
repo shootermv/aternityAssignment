@@ -1,41 +1,49 @@
-<div layout="vertical" layout-fill>
-<md-content layout-fill>
-    <form name="rolForm">
-      <md-input-container class="md-block">
-        <label>Name</label>
-        <input md-maxlength="20" required md-no-asterisk name="name" ng-model="addCtrl.role.name">
-        <div ng-messages="rolForm.name.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="md-maxlength">The name must be less than 20 characters long.</div>
-        </div>
-      </md-input-container>
-      <md-input-container class="md-block">
-        <label>Description</label>
-        <input md-maxlength="30" required md-no-asterisk name="description" ng-model="addCtrl.role.description">
-        <div ng-messages="rolForm.description.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
-        </div>
-      </md-input-container>
+<div >
 
-
-    <md-list class="fixedRows">
-      <md-subheader class="md-no-sticky">Previlegies</md-subheader>
-
-      <md-list-item class="md-2-line contact-item selected" ng-repeat="(index, privilege) in addCtrl.role.privileges">
-        <div class="md-list-item-text compact">
-          <md-checkbox class="md-secondary" ng-model="privilege.isSelected"></md-checkbox>
-          <p>{{privilege.name}}</p>
-        </div>
-      </md-list-item>
-    </md-list>
-
-      <div>
-        <md-button type="submit" ng-click="addCtrl.addRole(rolForm)">Submit</md-button>
+  <md-card>
+    <md-toolbar class="md-info">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex">Add Role</h2>
       </div>
-      <div>
-        <pre>{{addCtrl.role | json}}</pre>
-      </div>
-    </form>
-</md-content>
+    </md-toolbar>
+
+
+    <md-card-content>
+        <form name="rolForm">
+          <md-input-container class="md-block">
+            <label>Name</label>
+            <input md-maxlength="20" required md-no-asterisk name="name" ng-model="addCtrl.role.name">
+            <div ng-messages="rolForm.name.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="md-maxlength">The name must be less than 20 characters long.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Description</label>
+            <input md-maxlength="30" required md-no-asterisk name="description" ng-model="addCtrl.role.description">
+            <div ng-messages="rolForm.description.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+            </div>
+          </md-input-container>
+
+
+        <md-list class="fixedRows">
+          <md-subheader class="md-no-sticky">Previlegies</md-subheader>
+
+          <md-list-item class="md-2-line contact-item selected" ng-repeat="(index, privilege) in addCtrl.role.privileges">
+            <div class="md-list-item-text compact">
+              <md-checkbox class="md-secondary" ng-model="privilege.isSelected"></md-checkbox>
+              <p>{{privilege.name}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+
+ 
+          <md-button aria-label="menu" class="md-fab md-warn" ng-click="addCtrl.addRole(rolForm)">
+             <md-icon>add</md-icon>
+          </md-button>
+        </form>
+    </md-card-content>
+  </md-card>
 </div>
