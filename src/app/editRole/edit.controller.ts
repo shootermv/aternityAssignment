@@ -13,7 +13,8 @@ export class editController {
     });
  }
 
- addRole() {
+ updateRole(frm) {
+   if(!frm.$valid){return;}
    this.rolesService.editRole(this.$state.params.id, this.role).then((data: any) => {  
      this.$state.go('home');
    });

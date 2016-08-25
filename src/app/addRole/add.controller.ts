@@ -14,7 +14,8 @@ export class addController {
     });
  }
 
- addRole() {
+ addRole(frm) {
+   if(!frm.$valid){return;}
    this.rolesService.createRole(this.role).then((data: any) => {  
       this.$state.go('home');
    });
