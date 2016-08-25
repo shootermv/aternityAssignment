@@ -1,0 +1,46 @@
+<div layout="vertical" layout-fill>
+
+  <md-content>
+    <header>
+      <acme-navbar creation-date="main.creationDate"></acme-navbar>
+    </header>
+
+    <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Roles</span>
+          </md-card-title-text>
+        </md-card-title>
+
+
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button ng-click="main.addRoleModal()">Add</md-button>
+          <md-button ng-click="main.editRoleModal()" ng-if="main.findSelected()">Edit</md-button>
+          <md-button ng-click="main.deleteRoleModal($event)" ng-if="main.findSelected()">Delete</md-button>
+        </md-card-actions>
+
+         <md-card-content>
+              <md-list-item ng-repeat="role in main.roles" ng-click="goToPerson(person.name, $event)" class="noright">
+                <p>{{ role.name }}</p>
+                <p>{{ role.description }}</p>
+                <md-checkbox class="md-secondary" ng-change="main.deselectOthers(role)" ng-model="role.isSelected"></md-checkbox>
+              </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+
+    <div class="techs" layout-align="center">
+      <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
+        <md-card-content>
+          <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
+          <h3 class="md-title">{{ awesomeThing.title }}</h3>
+          <p>{{ awesomeThing.description }}</p>
+        </md-card-content>
+        <div class="md-action-buttons">
+          <md-button ng-href="{{ awesomeThing.url }}">Website</md-button>
+        </div>
+      </md-card>
+    </div>
+  </md-content>
+
+</div>
