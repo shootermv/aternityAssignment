@@ -2,6 +2,10 @@ import { rolesService, IRole } from '../components/roles/roles.service';
 
 export class editController {
  public role:any;
+ public selectedItem:any = null;
+ public searchText:any = null;
+ public selectedPrivileges = <any>[];
+
 
  /* @ngInject */
  constructor(
@@ -31,6 +35,10 @@ export class editController {
    });
  }
 
+
+ querySearch (query) {
+     return this.rolesService.getAllPrivileges();
+ }
 
  showToastr(txt, action) {
     this.toastr[action](txt);

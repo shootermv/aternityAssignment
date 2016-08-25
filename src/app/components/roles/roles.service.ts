@@ -6,7 +6,7 @@ export interface IRole {
 }
 
 export class rolesService {
-  
+  private avalPrivileges : Array<string>=[];
   /** @ngInject */
   constructor (private $log: angular.ILogService, private $http: angular.IHttpService) {
     
@@ -18,18 +18,12 @@ export class rolesService {
      return myObj[x];
     });
   } 
-  private processPrivileges(role) {
-    //do not want to transform the real role obj
-    let _role = angular.copy(role);
-    //need to store only selected ones
-    _role.privileges = _role.privileges.filter(r=>r.isSelected===true);
-    //need to convert privileges to array which contain only names
-    _role.privileges = _role.privileges.map(p=>p.name);
-    return _role;
-  }
+
   //--service public methods 
   getRoles(): angular.IPromise<any[]>{
     return this.$http.get('/api/roles').then((response: any): any => {
+       //lets store all priviledges
+       this.avalPrivileges = response.data.privileges;
        return this.convertToArray(response.data.roles);
     })
     .catch((error: any): any => {
@@ -45,9 +39,7 @@ export class rolesService {
     });
   }
   createRole(role): angular.IPromise<any[]>{
-
-    let roleCpy = this.processPrivileges(role);
-    return this.$http.post('/api/roles/create',roleCpy).then((response: any): any => {
+    return this.$http.post('/api/roles/create',role).then((response: any): any => {
          return  'data saved successfully';
     })
     .catch((error: any): any => {
@@ -56,37 +48,23 @@ export class rolesService {
     });
   }
   editRole(id, role): angular.IPromise<any[]>{
-    let roleCpy = this.processPrivileges(role);
-    return this.$http.post('/api/roles/'+id+'/update',roleCpy).then((response: any): any => {
+    return this.$http.post('/api/roles/'+id+'/update',role).then((response: any): any => {
         return  'data saved successfully';
     }).catch((error: any): any => {
         this.$log.error('XHR Failed for getContributors.\n', error.data);
         throw error.data;
     });
   }
-  getAvaliabePrivileges(): angular.IPromise<any[]>{
-    return this.$http.get('/api/roles').then((response: any): any => {
-       return response.data.privileges.map(p=>{ return {name:p}; });
-    })
-    .catch((error: any): any => {
-      this.$log.error('XHR Failed for getContributors.\n', error.data);
-    });
+
+  getAllPrivileges() : Array<string>{
+    return this.avalPrivileges || [];
   }
   getRoleDetails(id): angular.IPromise<any[]>{
     return this.$http.get('/api/roles').then((response: any): any => {
-       let selectedRole = response.data.roles[id];
-       let avalibalePrivileges = response.data.privileges.map(p=>{ 
-        return {
-         isSelected :selectedRole.privileges.indexOf(p)>=0,
-         name:p
-        }; 
-       });
-       response.data.selectedRole = selectedRole;
-       response.data.selectedRole.privileges = avalibalePrivileges;
-       return  response.data.selectedRole;
+       return response.data.roles[id];
     })
     .catch((error: any): any => {
-      this.$log.error('XHR Failed for getContributors.\n', error.data);
+      this.$log.error('XHR Failed find role.\n', error.data);
     });
   } 
  //--END of public methods

@@ -2,6 +2,10 @@ import { rolesService, IRole } from '../components/roles/roles.service';
 
 export class addController {
  public role:any;
+ public selectedItem:any = null;
+ public searchText:any = null;
+
+
  /* @ngInject */
  constructor(
    private rolesService:rolesService,
@@ -12,11 +16,8 @@ export class addController {
     this.activate();
  }
  activate() {
-    this.role = {name:'',description:''} ;
-    this.rolesService.getAvaliabePrivileges()
-    .then((data: any) => {
-        this.role.privileges = data;
-    });
+    this.role = {name:'',description:'', privileges:[]} ;
+
  }
 
  addRole(frm) {
@@ -34,4 +35,8 @@ export class addController {
  showToastr(txt, action) {
     this.toastr[action](txt);
  }
+ querySearch (query) {
+     return this.rolesService.getAllPrivileges();
+ }
+
 }
