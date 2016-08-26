@@ -2,7 +2,7 @@ export interface IRole {
   id: number;
   name: string;
   description: string;
-
+  privileges: Array< string >
 }
 
 export class rolesService {
@@ -20,8 +20,9 @@ export class rolesService {
   } 
 
   //--service public methods 
-  getRoles(): angular.IPromise<any[]>{
-    return this.$http.get('/api/roles').then((response: any): any => {
+  getRoles(): angular.IPromise<IRole[]>{
+    return this.$http.get('/api/roles')
+    .then((response: any): IRole[] => {
        //lets store all priviledges
        this.avalPrivileges = response.data.privileges;
        return this.convertToArray(response.data.roles);

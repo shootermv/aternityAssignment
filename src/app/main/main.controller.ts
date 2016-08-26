@@ -76,24 +76,14 @@ findSelected() {
  }
 
   /** @ngInject */
-  activate($timeout: angular.ITimeoutService) {
+  activate() {
     this.getWebDevTec();
 
     this.rolesService.getRoles()
-    .then((data: any) => {
+    .then((data:IRole[]) => {
         this.roles = data;
     });
 
-    $timeout(() => {
-      this.classAnimation = 'rubberBand';
-    }, 1000);
-
-    
-    let newrole = {name:'Super Admin', description:'super administrator', privileges:[
-"View Data"]};
-
-    //this.delRole(12);
-    
   }
   
  showToastr(txt, action) {
