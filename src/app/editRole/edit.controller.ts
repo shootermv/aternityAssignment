@@ -1,4 +1,4 @@
-import { rolesService, IRole } from '../components/roles/roles.service';
+import { rolesService, IRole, Role } from '../components/roles/roles.service';
 
 export class editController {
  public role:any;
@@ -18,7 +18,7 @@ export class editController {
  }
  activate() {
     this.rolesService.getRoleDetails(this.$state.params.id)
-    .then((data: any) => {
+    .then((data: Role) => {
         this.role = data;
     });
  }

@@ -1,10 +1,17 @@
 export interface IRole {
-  id: number;
+  id?: string;
   name: string;
   description: string;
-  privileges: Array< string >
+  privileges: Array<string>;
+  isSelected?:boolean
 }
-
+export class Role implements IRole{
+  constructor(
+  public name: string,
+  public description: string,
+  public privileges: Array<string>,
+  public id?: string){}
+}
 export class rolesService {
   private avalPrivileges : Array<string>=[];
   /** @ngInject */
@@ -13,9 +20,8 @@ export class rolesService {
   }
    //for converting roles which comes from server as object to array for convenience 
   private convertToArray(myObj){
-   return Object.keys(myObj).map(x => {
-     myObj[x].id = x;
-     return myObj[x];
+   return Object.keys(myObj).map(x => {    
+     return new Role( myObj[x].name, myObj[x].description, myObj[x].privileges, x);
     });
   } 
 

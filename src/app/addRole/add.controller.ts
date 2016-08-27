@@ -1,4 +1,4 @@
-import { rolesService, IRole } from '../components/roles/roles.service';
+import { rolesService, IRole ,Role} from '../components/roles/roles.service';
 
 export class addController {
  public role:any;
@@ -16,7 +16,7 @@ export class addController {
     this.activate();
  }
  activate() {
-    this.role = {name:'',description:'', privileges:[]} ;
+    this.role = new Role('','', []);
 
  }
 

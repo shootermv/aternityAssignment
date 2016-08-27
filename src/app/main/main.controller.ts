@@ -25,7 +25,7 @@ export class MainController {
     this.classAnimation = '';
     this.creationDate = 1472104914685;
     this.toastr = toastr;
-    this.activate($timeout);
+    this.activate();
   }
 
 
