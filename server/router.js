@@ -67,20 +67,28 @@ router.delete('/api/roles/:id/delete', function*() {
 
 router.post('/api/roles/:id/update', function*() {
   let post = this.request.body;
-  posts.roles[this.params.id]=post;
+  if(post.name==='Admin'){
+        this.throw(404, 'You cannot edit Admin role');
+  }else if(post.privileges.length==0) {
 
+       this.throw(404, 'privileges cannot be empty');
   
-  this.body = post;
-
+  } else {
+    posts.roles[this.params.id]=post;
+    this.body = post;
+  }
 });
 
 
 router.post('/api/roles/create', function*() {
   let newPost = this.request.body;
+  if(newPost.privileges.length==0) {
+     this.throw(404, 'privileges cannot be empty');
+  }else {
+    posts.roles[uuid.v4()] = newPost;
+    this.body = {success: true};
+  }     
 
-  posts.roles[uuid.v4()] = newPost;
-
-  this.body = {success: true};
 });
 
 
