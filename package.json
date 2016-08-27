@@ -1,7 +1,13 @@
 {
   "name": "aternity02",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "koa": "1.2.1",
+    "koa-bodyparser": "2.2.0",
+    "koa-router": "5.4.0",
+    "koa-static": "2.0.0",
+    "node-uuid": "1.4.7"    
+  },
   "scripts": {
     "test": "gulp test"
   },
