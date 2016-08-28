@@ -1,4 +1,5 @@
-import { rolesService, IRole ,Role} from '../components/roles/roles.service';
+import { rolesService } from '../components/roles/roles.service';
+import {  IRole, Role } from '../models/role';
 
 export class addController {
  public role:any;
