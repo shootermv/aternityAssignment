@@ -27,3 +27,15 @@ gulp
 ``` 
   - After build finished copy files from "dist" directory
   - Place files to your tomcat webapps directory
+
+### Running Dev Environment
+  - Open terminal on project root directory
+  - Run :
+```
+node server/index
+``` 
+  - Open another terminal window
+  - Run :
+  ```
+gulp serve
+``` 
