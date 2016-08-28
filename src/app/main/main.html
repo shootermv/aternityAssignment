@@ -6,31 +6,7 @@
     <md-card>
       <md-toolbar class="md-info">
         <div class="md-toolbar-tools">
-          <h2 class="md-flex">Roles</h2>
-
-          <md-menu md-position-mode="target-right target" ng-if="main.findSelected()">
-            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-              <md-icon>more_vert</md-icon>
-            </md-button>
-            <md-menu-content width="4" >
-              <md-menu-item>
-                <md-button ng-click="main.editRoleModal()">
-                    <div layout="row" flex>
-                      <p flex>Edit</p>
-                      <md-icon>mode_edit</md-icon>
-                    </div>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="main.deleteRoleModal($event)" >
-                    <div layout="row" flex>
-                      <p flex>Delete</p>
-                      <md-icon>delete</md-icon>
-                    </div>
-                </md-button>
-              </md-menu-item>            
-            </md-menu-content>
-          </md-menu>
+          <h2 class="md-flex">Roles Management</h2>
         </div>
       </md-toolbar>
 
@@ -38,7 +14,21 @@
               <md-list-item ng-repeat="role in main.roles" ng-click="goToPerson(person.name, $event)" class="noright">
                 <p>{{ role.name }}</p>
                 <p>{{ role.description }}</p>
-                <md-checkbox class="md-secondary" ng-change="main.deselectOthers(role)" ng-model="role.isSelected"></md-checkbox>
+               
+                <md-button ng-click="main.editRoleModal(role)">
+                    <div layout="row" flex>                    
+                      <md-icon>mode_edit</md-icon>
+                    </div>
+                </md-button>
+        
+                <md-button ng-click="main.deleteRoleModal(role, $event)" >
+                    <div layout="row" flex>                     
+                      <md-icon>delete</md-icon>
+                    </div>
+                </md-button>
+            
+        
+       
               </md-list-item>
             </md-list>
         </md-card-content>

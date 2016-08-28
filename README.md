@@ -36,6 +36,6 @@ node server/index
 ``` 
   - Open another terminal window
   - Run :
-  ```
+```
 gulp serve
 ``` 

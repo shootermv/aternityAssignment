@@ -51,25 +51,19 @@ findSelected() {
  addRoleModal() {
    this.$state.go('add');
  }
- editRoleModal() {
-   let found = this.findSelected();
-
-   if(!found){return;} // <--if no roles selected there is nothing to edit
-   this.$state.go('edit',{id: found.id});
+ editRoleModal(role) {
+   this.$state.go('edit',{id: role.id});
  }
- deleteRoleModal(ev) {
-   let found = this.findSelected();
-
-   if(!found){return;} // <--if no roles selected there is nothing to delete
+ deleteRoleModal(role, ev) {
     var confirm = this.$mdDialog.confirm()
           .title('Would you like to delete this role?')
           .targetEvent(ev)
           .ok('Yes')
           .cancel('Cancel');
     this.$mdDialog.show(confirm).then(() => { 
-      this.rolesService.delRole(found.id)
+      this.rolesService.delRole(role.id)
       .then((data: any) => {
-         this.roles.splice(this.roles.indexOf(found),1); //delete the role from the list
+         this.roles.splice(this.roles.indexOf(role),1); //delete the role from the list
          this.showToastr('deleted', 'success');
       });
     });
