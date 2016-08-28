@@ -1,7 +1,8 @@
 import { rolesService, IRole, Role } from '../components/roles/roles.service';
 
 export class editController {
- public role:any;
+ public role:Role;
+ public roles:IRole[];
  public selectedItem:any = null;
  public searchText:any = null;
  public selectedPrivileges = <any>[];
@@ -17,6 +18,15 @@ export class editController {
     this.activate();
  }
  activate() {
+    //get all roles for side list
+    this.rolesService.getRoles()
+    .then((data:IRole[]) => {
+        this.roles = data;
+    });
+
+   
+
+
     this.rolesService.getRoleDetails(this.$state.params.id)
     .then((data: Role) => {
         this.role = data;

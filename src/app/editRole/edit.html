@@ -1,62 +1,75 @@
-<div>
-  <md-card>
+<div layout="row" layout-wrap>
     <md-toolbar class="md-info">
       <div class="md-toolbar-tools">
         <h2 class="md-flex">Edit Role</h2>
       </div>
     </md-toolbar>
-
-
-    <md-card-content>
-        <form name="rolForm">
-          <md-input-container class="md-block">
-            <label>Name</label>
-            <input md-maxlength="20" required md-no-asterisk name="name" ng-model="editCtrl.role.name">
-            <div ng-messages="rolForm.name.$error">
-              <div ng-message="required">This is required.</div>
-              <div ng-message="md-maxlength">The name must be less than 20 characters long.</div>
+    <div flex="33">
+      <md-content>
+        <md-list>
+          <md-list-item class="md-3-line" ng-repeat="role in editCtrl.roles">
+            <div class="md-list-item-text"> 
+              <md-button ui-sref="edit({id:role.id})" ng-class="{'md-primary':role.id === editCtrl.role.id}">{{role.name}}</md-button>
             </div>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Description</label>
-            <input md-maxlength="30" required md-no-asterisk name="description" ng-model="editCtrl.role.description">
-            <div ng-messages="rolForm.description.$error">
-              <div ng-message="required">This is required.</div>
-              <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+           
+            <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </div>
+    <div flex="66">
+       <md-card>
+          <md-card-content>
+              <form name="rolForm">
+                <md-input-container class="md-block">
+                  <label>Name</label>
+                  <input md-maxlength="20" required md-no-asterisk name="name" ng-model="editCtrl.role.name">
+                  <div ng-messages="rolForm.name.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="md-maxlength">The name must be less than 20 characters long.</div>
+                  </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Description</label>
+                  <input md-maxlength="30" required md-no-asterisk name="description" ng-model="editCtrl.role.description">
+                  <div ng-messages="rolForm.description.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+                  </div>
+                </md-input-container>
+
+
+
+            <md-input-container class="md-block">
+              <label>Privileges</label>
+                <md-chips ng-model="editCtrl.role.privileges" md-autocomplete-snap
+                    md-require-match="true">
+                    <md-autocomplete
+                        md-selected-item="editCtrl.selectedItem"
+                        md-search-text="editCtrl.searchText"
+                        md-items="item in editCtrl.querySearch(editCtrl.searchText)"
+                        md-item-text="item"
+                        placeholder="Search for a privilege">
+                      <span md-highlight-text="editCtrl.searchText">{{item}}</span>
+                    </md-autocomplete>
+                      <md-chip-template>
+                        <span>
+                          <strong>{{$chip}}</strong>
+                        </span>
+                      </md-chip-template>
+              </md-chips>
+              </md-input-container>
+
+
+              <div>
+
+                <md-button aria-label="menu" class="md-fab md-warn" ng-click="editCtrl.updateRole(rolForm)">
+                  <md-icon>save</md-icon>
+                </md-button>
+                <md-button ng-click="editCtrl.cancel()" class="md-raised md-primary">Cancel</md-button>
             </div>
-          </md-input-container>
-
-
-
-       <md-input-container class="md-block">
-         <label>Privileges</label>
-          <md-chips ng-model="editCtrl.role.privileges" md-autocomplete-snap
-              md-require-match="true">
-              <md-autocomplete
-                  md-selected-item="editCtrl.selectedItem"
-                  md-search-text="editCtrl.searchText"
-                  md-items="item in editCtrl.querySearch(editCtrl.searchText)"
-                  md-item-text="item"
-                  placeholder="Search for a privilege">
-                <span md-highlight-text="editCtrl.searchText">{{item}}</span>
-              </md-autocomplete>
-                <md-chip-template>
-                  <span>
-                    <strong>{{$chip}}</strong>
-                  </span>
-                </md-chip-template>
-         </md-chips>
-        </md-input-container>
-
-
-        <div>
-
-          <md-button aria-label="menu" class="md-fab md-warn" ng-click="editCtrl.updateRole(rolForm)">
-             <md-icon>save</md-icon>
-          </md-button>
-          <md-button ng-click="editCtrl.cancel()" class="md-raised md-primary">Cancel</md-button>
-      </div>
-      </form>
-    </md-card-content>
- </md-card>
+            </form>
+          </md-card-content>
+      </md-card>
+    </div>
 </div>

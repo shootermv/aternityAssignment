@@ -66,9 +66,10 @@ export class rolesService {
   getAllPrivileges() : Array<string>{
     return this.avalPrivileges || [];
   }
-  getRoleDetails(id): angular.IPromise<any[]>{
+  getRoleDetails(id): angular.IPromise<Role>{
     return this.$http.get('/api/roles').then((response: any): any => {
-       return response.data.roles[id];
+       let r = response.data.roles[id];
+       return new Role(r.name, r.description, r.privileges, id);
     })
     .catch((error: any): any => {
       this.$log.error('XHR Failed find role.\n', error.data);
