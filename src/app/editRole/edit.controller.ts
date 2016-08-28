@@ -35,7 +35,9 @@ export class editController {
    });
  }
 
-
+ cancel():void {
+   this.$state.go('home');
+ }
  querySearch (query) {
      return this.rolesService.getAllPrivileges();
  }

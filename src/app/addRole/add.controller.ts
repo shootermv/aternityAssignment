@@ -17,9 +17,11 @@ export class addController {
  }
  activate() {
     this.role = new Role('','', []);
-
  }
 
+ cancel():void {
+   this.$state.go('home');
+ }
  addRole(frm) {
    if(!frm.$valid){return;}
    this.rolesService.createRole(this.role).then((data: any) => {  
