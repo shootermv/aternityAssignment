@@ -20,6 +20,12 @@ Includes basic angular app which can send crud requests to the server
 
 
 ### Compile To Es5 For Run With Tomcat
+  - You must have gulp and bower installed globally on your machine
+  - Download the repo (git clone https://github.com/shootermv/aternityAssignment)
+  - Run 
+```
+npm i & bower install
+```   
   - Open terminal on project root directory
   - Run 
 ```
