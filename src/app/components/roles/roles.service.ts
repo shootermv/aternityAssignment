@@ -22,11 +22,11 @@ export class rolesService {
        return this.convertToArray(response.data.roles);
     })
     .catch((error: any): any => {
-      this.$log.error('XHR Failed for getContributors.\n', error.data);
+      this.$log.error('XHR Failed for roles.\n', error.data);
     });
   }
   delRole(id): angular.IPromise<any[]>{
-    return this.$http.delete('/api/roles/'+id+'/delete').then((response: any): any => {
+    return this.$http.delete(`/api/roles/${id}/delete`).then((response: any): any => {
         console.log('success')
     })
     .catch((error: any): any => {
@@ -43,10 +43,10 @@ export class rolesService {
     });
   }
   editRole(id, role): angular.IPromise<any[]>{
-    return this.$http.post('/api/roles/'+id+'/update',role).then((response: any): any => {
+    return this.$http.post(`/api/roles/${id}/update`,role).then((response: any): any => {
         return  'data saved successfully';
     }).catch((error: any): any => {
-        this.$log.error('XHR Failed for getContributors.\n', error.data);
+        this.$log.error('XHR Failed to delete role.\n', error.data);
         throw error.data;
     });
   }
