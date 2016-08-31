@@ -1,13 +1,9 @@
 import { WebDevTecService, ITecThing } from '../components/webDevTec/webDevTec.service';
-import { rolesService, IRole } from '../components/roles/roles.service';
-
+import { rolesService } from '../components/roles/roles.service';
+import {  IRole, Role } from '../models/role';
 export class MainController {
-  public awesomeThings: ITecThing[];
-  public webDevTec: WebDevTecService;
-  public classAnimation: string;
-  public creationDate: number;
   public toastr: any;
-  public roles:Array<Object>;
+  public roles:IRole[];
   
   /* @ngInject */
   constructor (
@@ -20,32 +16,10 @@ export class MainController {
     private $state      : ng.ui.IStateProvider
     ) {
 
-    this.awesomeThings = new Array();
-    this.webDevTec = webDevTec;
-    this.classAnimation = '';
-    this.creationDate = 1472104914685;
+
     this.toastr = toastr;
     this.activate();
   }
-
-
- deselectOthers(role) {
-   // must deselect all other roles so only one role can be selected at time
-  this.roles.forEach(rol=>{  
-    if(rol.id!=role.id){
-      rol.isSelected=false;
-    }   
-  });
- }
-
-
-findSelected() {
-  if(!this.roles || !this.roles.length){
-    return false;
-  }
-  let found = this.roles.find(x=>{return x.isSelected===true;});
-  return found;
-}
 
 
  addRoleModal() {
@@ -71,7 +45,6 @@ findSelected() {
 
   /** @ngInject */
   activate() {
-    this.getWebDevTec();
 
     this.rolesService.getRoles()
     .then((data:IRole[]) => {
@@ -84,7 +57,4 @@ findSelected() {
     this.toastr[action](txt);
  }
 
-  getWebDevTec() {
-    this.awesomeThings = this.webDevTec.tec;
-  }
 }
