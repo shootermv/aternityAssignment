@@ -51,7 +51,7 @@ export class rolesService {
     });
   }
 
-  getAllPrivileges() : Array<string>{
+  getAllPrivileges() : string[] {
     return this.avalPrivileges || [];
   }
   getRoleDetails(id): angular.IPromise<Role>{
